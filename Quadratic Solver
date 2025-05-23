@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Quadratic_Solver {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		double x1 = 0, x2 = 0, D = 0;
+		int a, b, c, y = 1;
+		while (y != 0) {
+			System.out.println("Enter Coefficient of X Squared");
+			a = sc.nextInt();
+			System.out.println("Enter Coefficient of X");
+			b = sc.nextInt();
+			System.out.println("Enter Constant");
+			c = sc.nextInt();
+			D = (b * b) - 4 * a * c;
+			if (D == 0) {
+				x1 = (-b) / (double) (2 * a);
+				System.out.println("Inputted equation:" + a + "X^2 +( " + b + "X) + " + c);
+				System.out.println("Given equation has two equal real root");
+				System.out.println("Upon computation, Roots of this equation are {" + x1 + "," + x1 + "}");
+			} else if (D > 0) {
+				x1 = (-b + Math.sqrt(D)) / (double) (2 * a);
+				x2 = (-b - Math.sqrt(D)) / (double) (2 * a);
+				System.out.println("Inputted equation:" + a + "X^2 +( " + b + "X) + " + c);
+				System.out.println("Given Equation has two distinct real roots");
+				System.out.println("Upon computation, Roots of this equation are {" + x2 + "," + x1 + "}");
+			} else {
+				System.out.println("Given Equation has complex roots!");
+
+			}
+			System.out.println("Enter any integer except 0 to continue");
+			System.out.println("Enter 0 to terminate");
+			y = sc.nextInt();
+
+		}
+		System.out.println("Program Terminated!");
+	}
+}
