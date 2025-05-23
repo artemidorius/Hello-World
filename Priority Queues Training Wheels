@@ -1,0 +1,37 @@
+import java.util.*;
+public class DSA{
+public static void main(String[] args) {
+	Scanner sc = new Scanner(System.in);
+	Queue<Integer> qu1 = new PriorityQueue<>();
+	Queue<Integer> qu2 = new PriorityQueue<>(Collections.reverseOrder());
+	Queue<String> qu3 = new PriorityQueue<>();
+	System.out.println("Enter 5 Integers followed by 5 more integers followed by 5 words");
+	for( int i = 0; i < 6; i++) {
+		qu1.offer(sc.nextInt());	
+	}
+	System.out.println("2");
+	for ( int i = 0; i < 6 ; i++) {
+		qu2.offer(sc.nextInt());
+	}
+	sc.nextLine();
+	System.out.println("3");
+	for ( int i = 0; i < 6; i++) {
+		qu3.offer(sc.nextLine());
+	}
+	
+	System.out.println("First 5 Numbers that you entered");
+	while (!qu1.isEmpty() ) {
+		System.out.println(qu1.poll());
+	}
+	
+	System.out.println("Second 5 Numbers that you entered");
+	while ( !qu2.isEmpty()) {
+		System.out.println(qu2.poll());
+	}
+	System.out.println("5 Words that you entered now sorted in Dictionary order");
+	while (!qu3.isEmpty() ) {
+		System.out.println(qu3.poll());
+	}
+	sc.close();
+}	
+}
