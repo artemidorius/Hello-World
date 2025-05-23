@@ -1,0 +1,58 @@
+import java.util.Scanner; // Import the Scanner class to handle user input
+
+public class Bubble_Sort {
+    public static void main(String[] args) {
+        // Create a Scanner object for reading user input
+        Scanner sc = new Scanner(System.in);
+
+        // Initialize an array to hold 10 integers
+        int[] numbers = new int[10];
+
+        // Prompt the user to enter 10 integers
+        System.out.println("Enter 10 integers:");
+
+        // Loop to read 10 integers from the user
+        for (int i = 0; i < numbers.length; i++) {
+            // Read the next integer from user input and store it in the array
+            numbers[i] = sc.nextInt();
+        }
+
+        // Bubble Sort Algorithm to sort the array in ascending order
+        // Bubble Sort repeatedly compares adjacent elements and swaps them if they are in the wrong order
+        // This process is repeated until the array is sorted
+
+        // Outer loop: Iterate over the entire array. 
+        // We run this loop 9 times (one less than the number of elements)
+        for (int i = 0; i < 9; i++) { // Using 9 directly instead of numbers.length - 1
+            // Inner loop: Compare each element with its adjacent element
+            // The number of comparisons decreases with each pass
+            for (int j = 0; j < 9 - i ; j++) {
+                // Compare the current element with the next element
+                if (numbers[j] > numbers[j + 1]) {
+                    // If the current element is greater than the next element, swap them
+
+                    // Store the current element in a temporary variable
+                    int temp = numbers[j];
+                    
+                    // Place the next element in the position of the current element
+                    numbers[j] = numbers[j + 1];
+                    
+                    // Place the value from the temporary variable into the next element's position
+                    numbers[j + 1] = temp;
+                }
+            }
+        }
+
+        // Close the Scanner object to release system resources
+        sc.close();
+
+        // Display the sorted array
+        System.out.println("Sorted array in ascending order:");
+
+        // Loop through the sorted array and print each element
+        for (int i = 0; i < numbers.length; i++) {
+            // Print each integer followed by a space
+            System.out.print(numbers[i] + " ");
+        }
+    }
+}
