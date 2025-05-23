@@ -1,0 +1,39 @@
+import java.util.Scanner;
+public class Binary_Search {
+   public static void main(String[] args) {
+   Scanner sc= new Scanner (System.in);
+   int a[] = new int[10];
+   int k = 0, p = 0, Ll = 0, Ul = 9, ns = 0;
+   System.out.println(" Enter 10 Numbers in an Ascending order only");
+   for ( int i = 0; i < 10; i++) {
+	   a[i] = sc.nextInt();
+	   
+   }
+   System.out.println("Enter number to be searched");
+   ns =sc.nextInt();
+   sc.close();
+   while ( Ll <= Ul) {
+	   p = (Ll + Ul)/2;
+	   if (a[p] < ns ) {
+		   Ll = p + 1;
+	   }
+	   if ( a[p] > ns) {
+		   Ul = p - 1;
+		   
+	   }
+	   if(ns == a[p]) {
+		   k = 1;
+		   break;
+	   }
+	   
+	   
+   }
+   if ( k == 1 ) {
+	   System.out.println("Search Successful");
+   }
+   else {
+	   System.out.println("Search Unsuccessful");
+   }
+	
+}
+}
