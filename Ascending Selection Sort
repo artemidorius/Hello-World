@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class Ascending_Selection_Sort {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] a = new int[10];
+
+        // Accept 10 numbers from the user
+        System.out.println("Enter 10 numbers:");
+        for (int i = 0; i < 10; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        // Selection Sort Algorithm using nested loops
+        for (int i = 0; i < a.length - 1; i++) {
+            // Outer loop selects the element to compare
+            for (int j = i + 1; j < a.length; j++) { // for every element, we are going to search the rest of the array for any smaller elements.   
+                // Compare the current element a[i] with the next element a[j]
+                if (a[j] < a[i]) {
+                    // If a[j] is smaller than a[i], we need to swap them
+                    // Swapping process:
+                    
+                    // 1. Store the value of a[i] in a temporary variable 'temp'
+                    int temp = a[i];
+                    
+                    // 2. Assign the value of a[j] to a[i], effectively placing the smaller value in the current position
+                    a[i] = a[j];
+                    
+                    // 3. Assign the value stored in 'temp' (which is the original a[i]) to a[j]
+                    //    This places the larger value in the position of a[j]
+                    a[j] = temp;
+
+                    // After the swap, a[i] now holds the smaller value, and a[j] holds the larger value
+                }
+            }
+        }
+
+        // Display the sorted array in ascending order
+        System.out.println("Sorted array in ascending order:");
+        for (int i = 0; i < 10; i++) {
+            System.out.print(a[i] + " ");
+        }
+    }
+}
