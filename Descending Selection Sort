@@ -1,0 +1,50 @@
+import java.util.Scanner; // Import Scanner class for user input
+
+public class descendingselectionsort {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in); // Create a Scanner object to read input from the user
+
+        // Define arrays to hold roll numbers and marks for 10 students
+        int roll[] = new int[10];
+        int a[] = new int[10];
+
+        // Loop to input roll numbers and marks
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Enter roll number and marks:");
+
+            // Read roll number and store it in the roll array
+            roll[i] = sc.nextInt();
+
+            // Read marks and store it in the marks array
+            a[i] = sc.nextInt();
+        }
+
+        // Selection Sort Algorithm to sort the students based on marks in descending order
+        for (int i = 0; i < a.length - 1; i++) {
+            // Iterate through the remaining unsorted portion of the array
+            for (int j = i + 1; j < a.length; j++) {
+                // Compare marks at index j with marks at index i
+                if (a[j] > a[i]) { // For descending order, check if marks at index j are greater than marks at index i
+                    // Swap roll numbers if a[j] > a[i]
+                    int temp1 = roll[j]; // Store the roll number at index j temporarily
+                    roll[j] = roll[i]; // Move the roll number from index i to index j
+                    roll[i] = temp1; // Assign the temporarily stored roll number to index i
+
+                    // Swap marks as well
+                    int temp2 = a[j]; // Store the marks at index j temporarily
+                    a[j] = a[i]; // Move the marks from index i to index j
+                    a[i] = temp2; // Assign the temporarily stored marks to index i
+                }
+            }
+        }
+
+        sc.close(); // Close the Scanner to prevent resource leaks
+
+        // Display the sorted merit list
+        System.out.println("Merit list is:");
+        // Loop through the arrays to display the sorted roll numbers and marks
+        for (int i = 0; i < 10; i++) {
+            System.out.println(roll[i] + "          " + a[i]); // Print roll number and marks in the sorted order
+        }
+    }
+}
