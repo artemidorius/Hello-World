@@ -1,0 +1,92 @@
+import java.util.*;
+
+
+public class Binomial_Theorem {
+	public static void main(String[] args) {
+		// Create an array of size n (depending on power of expression) to store
+		// coefficients of pascal's triangle
+		// Using the formula for coefficients from Pascal's Triangle will make it a hell
+		// lot easier
+		// First lets try for an expression with the row of said power of Pascal's
+		// triangle already given to us.
+		// What is we generate the Pascal's triangle till the row of the power, and then
+		// store the final row into the array?
+
+		Scanner sc = new Scanner(System.in);
+		int xcof = 0, ycof = 0, n = 0;
+		long factorialn = 1, factorialnminusr, factorialr;
+		System.out.println("Comparing your expression to \\ (ax + by)^n \\");
+		System.out.println("Enter Coeffient of X or a (Do not use '+' sign for positive integers)");
+		xcof = sc.nextInt();
+		System.out.println("Enter Coeffient of Y  or b (Do not use '+' sign for positive integers)");
+		ycof = sc.nextInt();
+		System.out.println("Enter a positive integral index < 21 to which you wish to raise expression to");
+		n = sc.nextInt();
+
+		if (n < 0) { // Three Conditions to check if power is negative, 1 or positive
+			System.out.println(
+					"I do not have the capabilities to calculate this yet! Try again with a positive integral index!");
+			System.exit(0);
+
+		} else if (n == 0) {
+			System.out.println("You have inputted the expression : (" + xcof + "X +(" + ycof + "Y) ) ^0");
+			System.out.println("Computing...");
+			System.out.println("Upon Expansion, we get entire expression equal to : 1");
+			System.out.println("Expansion Successful");
+			System.exit(0);
+		}
+
+		else { // If n > 0, we are now calculating binomial coefficients
+			Long a[] = new Long[n + 1]; // To Store binomial coefficients
+
+			for (int j = 1; j <= n; j++) { // Pre-computing factorial of n
+				factorialn *= j;
+			}
+
+			for (int i = 0; i < a.length; i++) { // Calculating all the binomial coefficients by generating new
+													// factorial for each r and (n-r)
+
+				factorialr = 1; // Initializing after each column
+				factorialnminusr = 1;
+
+				for (int j = 1; j <= i; j++) { // Factorial of R
+					factorialr *= j;
+
+				}
+
+				for (int k = 1; k <= (n - i); k++) { // Factorial of (N - R)
+					factorialnminusr *= k;
+
+				}
+
+				a[i] = (long) ((factorialn) / (factorialnminusr * factorialr)); // Stored all values of Binomial
+																				// Coefficients for
+				// said power n
+			}
+
+			System.out.println("Binomial Coefficients: ");
+			for (int x = 0; x < n + 1; x++) { // To print Binomial Coefficients
+				System.out.println(a[x]);
+			}
+			System.out.println("Computing...");
+			System.out.println("Upon Expansion, we get entire expression equal to ");
+
+			for (int i = 0; i < a.length; i++) { // Final printing of Expression
+				if (i == 0) { // First Term
+					System.out.print(Math.pow(xcof, n) + "X^" + (n - i));// As these 2 terms are the only ones that
+																			// contain only 1 variable.
+
+				} else if (i == a.length - 1) { // Last term
+					System.out.print(" + " + Math.pow(ycof, n) + " Y^" + (n));
+				} else { // Middle Expression
+					System.out.print("+ (" + a[i] * Math.pow(xcof, (n - i)) * Math.pow(ycof, i) + " X^" + (n - i) + "Y^"
+							+ i + ") ");
+				}
+			}
+			System.out.println();
+			System.out.println("Expansion Successful");
+
+		}
+		sc.close();
+	}
+}
