@@ -1,0 +1,22 @@
+import java.util.*;
+public class fibonacci{
+  // a fiboancci series is one in which every member in the series is a sum of the preceeding 2 members. eg {0,1,1,2,3,5,8,13,21,34,55,89 and so on}. we aim to accept a value from user and tell them the fibonacci number at that index. 
+  // eg if n == 8, then we will return the 8th no. in the fibonacci series by generating the entire series behind it
+public int fib(int n){ // where n is the index
+   if ( n <= 1){
+  return n;// series starts from 0
+   }
+  else{
+  return fib(n-1) + fib(n-2); // our number will be sum of its preceeding 2 no.s which themselves will be sum of their respective last 2 elements
+                        }
+                       } 
+public static void main(String args[]){
+    Scanner sc = new Scanner(System.in);
+    System.out.println(" Enter fibonacci index ");
+    int n = sc.nextInt();
+    fibonacci ob = new fibonacci();
+    System.out.println("The " + n + "th term in the fibonacci series is " + ob.fib(n)); // Calling our method. Stack starts from here
+    
+}
+ }
+    
