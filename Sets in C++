@@ -1,0 +1,74 @@
+#include <iostream>
+#include <set> // to use set
+#include <unordered_set> // for unordered_set and unordered_multiset
+#include <multiset>
+using namespace std;
+
+int main(){
+    
+    // Declaration. As it is a dynammic container, it doesnt need custom size
+    set<int> ob;
+    
+    // All elements in the set structure are always distinct and are always kept in ascending order by default. [] notation doesnt work here
+    // Structures that don't have indexes use iterators 
+    
+    // To add elements to a set:
+    ob.insert(16);
+    ob.insert(25);
+    ob.insert(9);
+    // ob = {9,16,25}
+    
+    // To check how many times an element shows up in the set
+    cout << "How many times did 25 show up?" << ob.count(25) << endl;
+    cout << "How many times did 36 show up?" << ob.count(36) << endl;
+    // Since in a set elements are always distinct, this will return 1 or 0
+    
+    // To remove an element 
+    ob.erase(9); // 9 got removed
+    
+    // Best way to print a set is a for each loop because there are no indexes here
+    
+    for ( int y : ob){
+        cout << y << endl;
+        
+    }
+    
+    // To accept set from user
+    int n;
+    cin >> n;
+    int x;
+    for ( int i = 0; i < n; i++){
+        cin >> x;
+        ob.insert(x);
+    }
+    
+    
+    
+    // Declaration of unordered_set 
+    unordered_set<int> us;
+    unordered_set<int> su= {3,5,6,3,1};
+    //su = {1,3,5,6}
+    
+    // All elements are still distinct however, there is no order and elements are stored according to order of appearance 
+    // ALL FUNCTIONS OF SET APPLY TO UNORDERED SET ( except lower_bound, upper_bound )
+    us.insert(5);
+    us.erase(3);
+    us.(7);
+    
+   // Declaration of Multiset (Ordered in ascending but not distinct)
+    multiset<int> sc;
+    multiset<int> cs = {5,5,5,5, 7,7,7,7};
+    cout << "How many times did 5 show up" << cs.count(5) << endl;
+    cs.erase(7);
+    for ( int z : cs){
+        cout << z<< endl;
+    }
+    
+    
+    // Declaration of unordered_multiset (no order, not distinct )
+    unordered_multiset<int> ab;
+    
+    
+    
+    
+}
