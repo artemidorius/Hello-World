@@ -1,0 +1,24 @@
+import java.util.*;
+public class trust{ // Max Subarray Sum by Kadane's Algorithm, solving problem in most efficient O(n)
+    public static void main(String args []){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter size of Array");
+        int n= sc.nextInt();
+        int a[] = new int[n];
+        System.out.println("Enter n elements");
+        int sum = 0, best = 0; 
+        for ( int i =0; i < n; i ++){
+            a[i] = sc.nextInt();
+        }
+        // Here's what Kadane's Algorithm does exactly. We go over each element once, and while going over the array, we try to find the segment ( not the smallest, just in general ) that has
+        // the largest value. The key principle of this algorithm is that at every iteration ( lets say we are at some kth element) we check whether the current subarray sum we are checking for
+        // has a smaller value when we add k, than k itself.( ie is sum + a[i] bigger or a[i]?) in this case, it would be better to discontinue the previous subarray and start a completely new sum from kth place as those negative values may
+        // hold us back in giving the greatest sum possible. NOT SMALLER, upon adding element k, if the sum is smaller than k itself, then we discontinue.
+        for ( int i = 0; i < n; i ++){
+            // We calculate the sum of the subarray we are considering as well as check if it is the best
+            sum = Math.max(sum + a[i] , a[i]);
+            best = Math.max(sum, best); // checking if current sum is bigger than 
+        }
+        System.out.println("The maximum subarray sum is " + best);
+    }
+}
