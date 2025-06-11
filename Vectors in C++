@@ -1,0 +1,45 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+
+int main(){
+    // Learning how to use vectors and its methods
+     
+    // Declaration:
+    vector<int> x;
+    
+    // Declaration of custom size:
+    vector<int> b(10);
+    
+    // Initialization with custom values same as java
+    vector<int> a = {2,3,4,5,6};
+    
+    // How to add custom elements
+    a.push_back(3); // just added 3 to the array.  
+ 
+    // The elements that are added after, are also stored later
+    a.push_back(17);
+    a.push_back(31);
+    // Currently said vector is [ 3, 17, 31]
+    
+    // the same [i] kind of notation works here, zero indexed
+    cout << a[0] << endl;
+    cout << a[1] << endl;
+    cout << a[2] << endl;
+    
+    // .length() 's  equivalent here is .size() which is also one indexed
+    cout<< a.size() << endl;
+    
+    // To see the very last element of the vector, we use the function .back()
+    cout << "The Last Element" << a.back() << endl;
+    
+    // To remove the very last element of the vector, we use the function .pop_back()
+    a.pop_back();
+    cout << "New Last Element" << a.back() << endl;
+    
+    
+    
+    
+    
+    
+}
