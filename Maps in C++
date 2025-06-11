@@ -1,0 +1,41 @@
+#include <map>
+#include<iostream>
+#include<string> // 'S'tring isnt valid in C++, only string
+using namespace std;
+
+int main(){
+    // Declaration of Maps: (map <key , value>)
+    // The set of keys in a map is always distinct as no duplicate keys exist 
+    map< string, int> m;
+    
+    // Whatever comes to the right of the equal to is the value
+    m["Atharva"] = 18;
+    m["Hey"] = 3;
+    m["Ayo"] = 16;
+    m["Sup"] = 3 ;
+    
+    // Multiple values can have the same keys, but not the other way round
+     cout<<m["Atharva"]<<endl;
+     cout<<m["Hey"]<<endl;
+     cout<<m["Sup"] << endl;
+     
+     // Lets go other way round
+     
+     map<int, string> a;
+     a[23] = "Atharva";
+     a[54] = "Sup";
+     a[2] = "Dawg"; 
+     cout << a[23]<<endl;
+     cout<< a[2] << endl;
+     
+     // If the value of a key is requested and the map doesnt contain it, then a value key pair is added with our key and value == 0
+     cout << m["school"] << endl; // will return 0 as it does not exist 
+     
+     // The count function checks whether a given key in a map exists ( returns 0 or 1 as all keys are distinct)
+     
+     bool c = m.count("Hey");
+     cout<< c << endl; // Print 1 as true
+     bool d = m.count("hey");
+     cout<<d<<endl; // Print 0 as false
+    
+}
