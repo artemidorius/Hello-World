@@ -1,1 +1,29 @@
+#include <bits/stdc++.h>
+#include <iostream> // Gives us access to input output operations like cin and cout
+#include <vector> // Gives us access to the vector (array) structure in c++
+#include <algorithm> // Gives us access to common algorithms like max, min
+using namespace std; // saves us from writing std:: over and over again
+
+int main() {// exactly the main method in java
+    cout << "Enter size of array" << endl; // cout stands for console output, << is an insertion operator while endl takes the cursor to the next line, like \n 
+    int n; // simple declaration
+    cin >> n; // cin stands for console input, kinda like the scanner in java and >> extraction operator and it pulls data from input stream into next
+    vector<int> a(n); // declares dynamic array of size n of name a and of integers, all set to 0 by default
+    cout <<"Enter n elements" << endl;
+    int best = 0, sum = 0; 
+    for ( int i = 0; i < n; i++){ // inputting array elemets
+        cin >> a[i];
+    }
+    for ( int i = 0; i < n ; i++){
+        sum = max(sum + a[i], a[i]);
+        best = max(sum, best);
+    }
+    cout << "The Maximum subarray sum is" << best << endl; // variables are printed like this
+    return 0; // compiler expects this. in java, main method would be void. returning 0 basically means that there are no syntax errors or runtime errors in our code. compilers add this line themselves too as it is the stats code
+    
+    // FOR COMPILERS LIKE THIS, GIVE INPUT BEFORE RUNNING IN ORDER TO AVOID RUNTIME ERROR
+}
+	
+
+
 
