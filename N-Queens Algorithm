@@ -1,0 +1,84 @@
+import java.util.*;
+
+public class NQueens {
+    // 4 Funtions: solveNQueens( recursive and backtracking), print(every solution), isSafe(checking if valid ), main ( input and call to recursive)
+    
+    
+    static int count = 0; // SOLUTION COUNT, as static methods can only access other static variables and methods: thus this is declared as static global variable
+
+    
+    static void printBoard(char[][] board) { // Prints the Board with our queens for every single solution
+        int n = board.length; // returns no. of rows in board/2d array
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println(); // the last line of the whole solution will only feed one line, which will not allow us to diffrentiate between one solution and another as 
+        // as they will be printed successively
+    }
+
+    
+    static boolean isSafe(char[][] board, int row, int col) { // checks whether its alright to place a queen at ( row, column) specific coordinate by taking into account the columns and 
+        // diagonals. this is done for every single index of every row of every solution. 
+        int n = board.length;
+
+        // Check column ↑
+        for (int i = 0; i < row; i++) { // all the rows upto ours to check if the whole column is clear
+            if (board[i][col] == 'Q') return false; //  row is increasing ( going down), column remains same as we are checking for a vertical line
+        }
+
+        // Check left diagonal ↖
+        for (int i = row-1, j = col-1; i >= 0 && j >= 0; i--, j--) { // moving left, 
+            if (board[i][j] == 'Q') return false; // i and j are moving along the left diagonal, simply remember the conditions
+        }
+
+        // Check right diagonal ↗
+        for (int i = row-1, j = col+1; i >= 0 && j < n; i--, j++) { // moving right
+            if (board[i][j] == 'Q') return false; // i is the same as its moving up but j is the ACTUAL PLAYER HERE
+        }
+
+        return true; // if all this shit doesnt work
+    }
+
+    
+    static void solveNQueens(char[][] board, int row) { // Main function from which this safe function arose from 
+        int n = board.length; // rows
+
+        if (row == n) {  // BASE CASE    // IF LAST ROW IS REACHED, THEN WE HAVE A VALID SOLUTION
+            count++;
+            printBoard(board);// calling print
+            return; // ending recursion, backtracking starts here
+        }
+
+        
+        for (int col = 0; col < n; col++) { // iterating through all the columns in this row 
+            if (isSafe(board, row, col)) { // if it is finally determined safe to put it there
+                board[row][col] = 'Q'; // placing a queen on the valid spot
+
+                solveNQueens(board, row + 1); // next row mf, comes back to this when a solution to this variant is found
+
+                board[row][col] = '.'; // bactracks to last row to continue iteration in the previous invocation
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the size of the board (N): ");
+        int n = sc.nextInt();
+
+        char[][] board = new char[n][n];
+
+        // HAD TO INITIALIZE THIS MF WITH DOTS AS OUR FUNCTION DOESN'T
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(board[i], '.');
+        }
+
+        solveNQueens(board, 0);// just once does the trick
+
+        
+        System.out.println("Total number of solutions for " + n + "-Queens = " + count); // will print the total solutions after all are displayed
+    }
+}
