@@ -1,0 +1,62 @@
+import java.util.*;
+class te {
+    public static int findContentChildren(int[] g, int[] s) {
+        // logic is: to give the least amount of size of cookie possible to satisfy the minimum greed factor so that most no. of cookies can be given
+        // pointers here are simply array indexes
+        // first we must sort the arrays
+        int a = g.length;
+        int b = s.length;
+        // Selection sort
+        for ( int i = 0; i < a; i++){
+            for ( int j = i +1; j < a; j++){
+                if (g[i] > g[j] ){
+                    int temp = g[i];
+                    g[i] = g[j];
+                    g[j]= temp;
+                }
+            }
+        }
+        for ( int i = 0; i < b; i++){
+            for ( int j = i+1; j < b; j++){
+                if (s[i] > s[j] ){
+                    int temp = s[i];
+                    s[i] = s[j];
+                    s[j]= temp;
+                }
+            }
+        }
+        // both arrays are now sorted
+        int x =0, y = 0; // x is the greed factor pointer and y is the size pointer
+        int satis = 0;
+        while(x<a && y <b){
+            if (g[x]<= s[y]){
+                // ie greed is satisfied
+                x++;
+                y++;
+                satis++; // no. of children satisfied
+            }
+            else{
+                // size too small
+                y++;
+            }
+
+        }
+        
+        return satis; // no. of children satisfied.
+    }
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Greed length, greed array, then size length and size array");
+        int n = sc.nextInt();
+        int a[] = new int[n];
+        for ( int i = 0; i < n; i++){
+            a[i] = sc.nextInt();
+        }
+        int m = sc.nextInt();
+        int b[] = new int[m];
+        for ( int i = 0; i < m; i++){
+            b[i] = sc.nextInt();
+        }
+        System.out.println(findContentChildren(a,b));        
+    }
+}
