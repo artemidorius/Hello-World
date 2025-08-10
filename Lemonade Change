@@ -1,0 +1,56 @@
+import java.util.*;
+class yo {
+    public static boolean lemonadeChange(int[] bills) {
+        int five =0, ten = 0, twenty = 0;
+        for ( int i = 0; i < bills.length; i++){
+            if ( bills[i] == 5){
+                five ++;
+            }
+            else if ( bills[i]==10){
+                if ( five>=1){
+                    five--;
+                    ten++;
+                }
+                else{
+                    return false;
+                }
+            }
+             // will 15 even exist? nope. not needed
+            else if ( bills[i] == 20){
+                ////Always try to use the largest denominations available in your change first before breaking them down into smaller ones.
+                 /*Larger denominations are “harder” to use and have fewer variations.
+
+                  Saving smaller denominations for future change-making keeps your options open.
+
+                This approach prevents you from exhausting your smallest bills too early, which are often crucial for smaller future transactions.*/
+                 if(five>=1 && ten>=1){
+                    five --;
+                    ten--;
+                    twenty++;
+                }
+                else if ( five>=3){
+                    five --;
+                    five--;
+                    five--;
+                    twenty++;
+                }
+                
+                else{
+                    return false;
+                }
+            }
+            //all possible amounts covered
+        }
+        return true;
+    }
+    public static void main(String agrs[]){
+        Scanner sc = new Scanner(System.in);
+        System.out.println(" Enter length of array, then array");
+        int n = sc.nextInt();
+        int a[] = new int[n];
+        for ( int i =0; i < n; i++){
+            a[i] = sc.nextInt();
+        }
+        System.out.println(lemonadeChange(a));
+    }
+}
