@@ -1,0 +1,99 @@
+import java.util.*;
+public class Multinomial_Theorem {
+	/*here the multi-nomial coefficient comes into play.With a as the no. of terms in the -omial and n the index to which the expression is raised: no. of terms in 
+	 * the expansion is: n+r-1(C)r-1. means there are those many ways to arrange all the powers (0,0,n) to (0,n,0) to (n,0,0). we can calculate that in a 2d array with those many rows
+	 * and the no. of columns will be equal to r( if we have 3 terms in the -omial, only 3 variables to distribute the powers among, sum = n). But how do we generate all permutations
+	 * of the whole no.s adding upto n? Will need backtracking if im not wrong. Basically we need to generate all possible ordered pairs with r parameters whose sum add upto n. 
+	 * Generating ordered pairs is probably the simplest application of backtracking so this will help. 
+	 * 
+	 * Backtracking: Going through all ordered pairs and only accepting those whose sum is = n. Whenever sum increases beyond n, thats a "dead end" in that particular branch
+	 */
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter no. of terms in -omial \nfor example: (1+x+x²+x³)³ has 4 terms ");
+		int r = sc.nextInt();
+		System.out.println("Enter the index of the -omial you wish to raise it to");
+		int n = sc.nextInt();
+		int rows = combinations(n+r-1, r-1); // columns
+		int a[][] = new int[rows][r];
+		backtracking(a, rows, r,n);
+		
+		
+	}
+	public static int combinations(int n, int r) {
+		long a =1,b=1,c=1;
+		for ( int i = n; i > 0; i--) {
+			a *= i;
+		}
+		for (int i = (n-r); i>0; i--) {
+			b *= i;
+		}
+		for ( int i = r; i > 0; i--) {
+			c*=i;
+		}
+		return (int)(a/(b*c));
+		
+	}
+	public static void backtracking(int a[][], int rows, int r, int n) {
+		// Need to fill up an array. Each row's sum is equal to n. There are r columns. There are {n+r-1(C)r-1} rows. Each element cannot be more than n, not less than n. 
+		/**
+		 * Choose an initial solution.
+           Explore all possible extensions of the current solution.
+           If an extension leads to a solution, return that solution.
+           If an extension does not lead to a solution, backtrack to the previous solution and try a different extension.
+           Repeat steps 2-4 until all possible solutions have been explored.
+		 */
+		
+		/** 
+		 * We will iterate through a row and move onto another. But, when the last column in a row is reached: that means the solution is found for that row. 
+		 * We want to change rows when we obtain a distinct solution. 
+		 * Such an algorithm always goes with recursion. When the recursion ends, the backtracking starts. read that again. 
+		 * Recursion: we use recursion to solve the whole row, and move onto another row when base case hits of reaching the last column. 
+		 * This stops us from overshooting a single row. But we will use a for loop to stop us from overshooting the columns ie the matrix when we reach the bottom. The main backtracking
+		 * statements also have to exist in that for loop . 
+		 * After the base case hits, we start going back and undoing it. 
+		 * Basically the computer will go through r! cases and only those will be accepted when all of them come to a sum of n. 
+		 * 
+		 * 
+		 * 
+		 * Ok see here: what u need to solve here with backtracking is an element. an element of an index. that is what i need to fill up. so, in order to solve a specific element
+		 * i can pass its exact row and column into a function, and the function's sole purpose would be to solve that particular cell until i call it again. 
+		 * now for the function that solves: u need to first break its task into subproblems. so in this case, its subproblem would be to deal with one ordered pair ( ie one row)
+		 * thats why we are putting a FOR LOOP inside the function because we broke its task into subproblems. 
+		 * now for each element, the function has a choice to either put the value from [0,n]. so ok. inside the for loop, we first ask it to make a choice for the particular row
+		 * and column from its decision space. it chose a value. now we need to get to the constraints part. 
+		 * is placing that value there breaking a rule? is it already a dead end if i place it there? in this case, we can check the sum of the already filled in row in which 
+		 * the element in case is. if it is greater than n, then its a wrong choice. 
+		 * BUT, if it is a right choice, then this is where we start our recursion. we recall the solver function with COL + 1 parameter to move onto the next. Now obviously, 
+		 * the columns which u are passing every time need a limit, so call for a base case where is columns are more than in array and the current row
+		 * is NOT the last row, then pass again with col = 0 and row = row + 1. the loop iterates through a row, and the recursive calls may go beyond the columns. also it is at
+		 * the base case where the recursion for a particular value of a particular element ends, because we started the whole freaking recursion for one value out of [0,n] and now it ends
+		 * outside the for loop, you backtrack that choice for when a single element's backtracking ends. or smth like that i didnt really understand for which exact step back tracking is
+		 * happening. 
+		 * 
+		 * 
+		 * 
+		 * Visualizing backtracking took some effort like that whole breakdown on the floor, and so you should have a paper and pen to work through multiple iterations to get an idea
+		 * 
+		 */
+		for ( int i = 0; i < r; i++) {
+			a[rows][r]
+			
+			
+		}
+		
+	}
+	public static boolean checker(int a[][], int rows, int r, int n) {
+		int sum = 0; 
+		for ( int i = 0; i < r; i++) {
+			sum += a[rows][i];
+		}
+		if ( sum > n) {
+			return false;
+		}
+		return true;
+		
+	}
+
+}
