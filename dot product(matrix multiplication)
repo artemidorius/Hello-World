@@ -1,0 +1,84 @@
+import java.util.*;
+public class matrices{
+    // input 2 2-D arrays with orders (n,m) and (p,q) and multiply them with RC method to return matrix of order (n,q)
+    //O(n.m.q), O(n^3) for square matrices
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        
+        
+        System.out.println("Enter order of Matrix A (n,m)");
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        System.out.println("Enter order of Matrix B (p,q)");
+        int p = sc.nextInt();
+        int q = sc.nextInt();
+        double A[][] = new double[n][m];
+        double B[][] = new double[p][q];
+        if(m != p){
+            System.out.println("Given Matrices aren't comparable, hence multiplication cannot be conducted");
+            
+            System.exit(0);
+        }
+        double C[][] = new double[n][q];
+        System.out.println("Enter values of A(n,m) as a linear sequence: top to bottom, left to right");
+        for ( int i = 0; i < n; i ++){
+            for ( int j = 0; j < m; j++){
+                A[i][j] = sc.nextDouble();
+            }
+        }
+        System.out.println("Enter values of B(p,q) as a linear sequence: top to bottom, left to right");
+        for ( int i = 0; i < p; i ++){
+            for ( int j = 0; j < q; j++){
+                B[i][j] = sc.nextDouble();
+            }
+        }
+        
+        // we move left to right in the left matrix and up to down in the right matrix
+        // the key fact is that for the calculation of one element, we multiply corresponding
+        // elements and add em up. its important to note that as m = p for every element we
+        // use only one loop to perform the multiplications and summation. use var k
+        double sum = 0;
+        for ( int i = 0; i < n; i++){ // storing values in solution matrix
+            for ( int j = 0; j < q; j++){
+                sum = 0;
+                // we are now at one element
+                for ( int k = 0; k < m; k++){
+                    sum += A[i][k]*B[k][j];
+                }
+                C[i][j] = sum;
+            }
+        }
+        
+        
+
+    
+    System.out.println("The Matrix A is");
+    for ( int i = 0; i < n; i ++){
+            for ( int j = 0; j < m; j++){
+                System.out.print(A[i][j] + "    ");
+            }
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+        }
+        System.out.println("The Matrix B is");
+    for ( int i = 0; i < p; i ++){
+            for ( int j = 0; j < q; j++){
+                System.out.print(B[i][j] + "    ");
+            }
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+        }
+    // display C(n,q)
+    System.out.println("The Matrix multiplication of A and B is:");
+    for ( int i = 0; i < n; i++){
+        for ( int j = 0; j < q; j++){
+            System.out.print(C[i][j] + "    ");
+        }
+        System.out.println();
+    }
+  }
+ }
