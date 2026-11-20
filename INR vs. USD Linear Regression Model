@@ -1,0 +1,50 @@
+/* 
+*The following model is an elementary introduction for me into Machine Learning. I have applied the concept of least squares, which is for
+*error minimation and linear regression, which is quite straightforward. Of course, actual global exchange rates will never follow a linear
+*trajectory, however they are one of the closest entity in the real world that somewhat do. This is coded in java, and no special libraries
+*are used for the computation 
+*/
+
+import java.util.Scanner;
+
+class LinearRegression {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+
+        double x[] = new double[10];
+        double y[] = new double[10];
+
+        System.out.println("enter usd/inr values for the past 10 years:"); // User enters hypothetical values ( or real idc )
+
+        for(int i = 0; i < 10; i++) {
+            x[i] = i + 1;
+            System.out.print("year " + (i + 1) + ": ");
+            y[i] = sc.nextDouble();
+        }
+
+// applying some straight line math and simple squared error minimization
+
+        double sx = 0, sy = 0, sxy = 0, sx2 = 0;
+
+        for(int i = 0; i < 10; i++) {
+            sx += x[i];
+            sy += y[i];
+            sxy += x[i] * y[i];
+            sx2 += x[i] * x[i];
+        }
+
+        double b = (10 * sxy - sx * sy) / (10 * sx2 - sx * sx);
+        double a = (sy - b * sx) / 10;
+
+        System.out.println("\nregression equation:");
+        System.out.println("y = " + a + " + " + b + "x");
+
+        System.out.println("\npredicted usd/inr rates:");
+
+        System.out.println("2 years: " + (a + b * 12));
+        System.out.println("5 years: " + (a + b * 15));
+        System.out.println("10 years: " + (a + b * 20));
+
+        sc.close();
+    }
+}
