@@ -1,0 +1,84 @@
+/** Question:
+We call an array A = [A1, A2, . . . , AM] of M integers good if Ai − Ai−1 ≤ K for all 1 < i ≤ M.
+Given an array of integers A, C is said to be a subsequence of A if it is possible to delete some (possibly
+none) elements from A to form C, without changing the order of the remaining elements. For example,
+the non-empty subsequences of [1, 1, 3] are [1], [1], [3], [1, 1], [1, 3], [1, 3] and [1, 1, 3].
+You are given a non-decreasing array A of N integers and the parameter K. Your task is to find
+the number of non-empty subsequences of A that are good. Notice that the same subsequence may
+arise multiple times in the array A. Each subsequence should be counted as many times as it appears
+in A.
+For example, for the input N = 3, K = 1, A = [1, 1, 3], there are 4 good non-empty subsequences,
+which are [1], [1], [3] and [1, 1].
+(a) N = 8, K = 0, A = [1, 1, 2, 3, 3, 3, 4, 4]
+(b) N = 8, K = 4, A = [1, 2, 3, 4, 5, 6, 7, 8]
+(c) N = 15, K = 9, A = [1, 1, 2, 3, 4, 4, 5, 6, 8, 10, 10, 10, 11, 12, 14]
+**/
+
+// Solution ( My First DP Solution )
+import java.util.*;
+public class good_sub {
+   // ZIO Problem 2
+	public static void main(String args[]) {
+		
+		// This is a classic DP Problem. creds to the IITGn professor that took time to explain this trivial ( impossibly difficult for me ) problem
+		
+		// There's many different levels to this. K is a number by which successive elements should differ at most by. 
+		// how to solve this: for each i, calculate the number of GOOD subsequences at that i ( "ending" cus of atmost). storing this in d[i]
+		// hence, the answer will be sum of subsequences ending at all i. 
+		// while hand computing, what you realize is: you're just appending that new value ( new last posn ) to all the previous subsequences in which appending is valid 
+		// i.e Ai - Aj doesnt grown bigger than k. this, and you're introducing one more value per i, cus of the singleton set for that i. 
+		
+		// so it reduces to: d[i] = (sum from d[j] to d[i-1], where j is the least value that satisfies A[i] - A[j] <= k ) + 1. 
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter size of Good sorted array");
+		int n = sc.nextInt();
+		int A[] = new int[n];
+	    System.out.println("Enter Array");
+	    for ( int i = 0 ; i < n; i ++) {
+	    	A[i] = sc.nextInt();
+	    	
+	    }
+	    System.out.println("Ënter value by which successive elements must at most differ by");
+	    int k = sc.nextInt();
+	    
+	    
+	    int d[] = new int[n]; // to store all the good subsequences ending at i. Final ans. to problem is d[0] + d[1] + .. + d[n-1] ( n-1 cus java is zero indexed )
+	    
+	    // in this question, given all the conditions, d[0] = 1 always as singleton set is always correct no matter what k.
+	    d[0] = 1;
+	    
+	    int j = 0;
+	    for ( int i = 1; i < n; i ++) { // filling up the d[i] array
+	    	// main concern is to get j. so, for each i, we iterate through the array, i = 0 to i = i -1. if no j is found, d[i] = 0 + 1 = 1
+	    	for (  j = 0; j <= i; j ++) {
+	    		if (A[i] - A[j] <= k ) { 
+	    			break; // we have the j value
+	    		}
+	    		
+	    	}
+	    	if(j == i ) {
+	    		// meaning no such j exists
+	    		d[i] = 1;
+	    	}
+	    	else {
+	    		for ( int a = j; a < i; a ++) { // summing from d[j] to d[i-1] 
+	    			d[i] += d[a];
+	    		}
+	    		d[i] ++;
+	    	}
+	    	
+	    }
+	    
+	    int ans = 0;
+	    for ( int i = 0; i < n; i ++) {
+	    	ans += d[i];
+	    }
+	    
+	    System.out.println("Number of GOOD Subsequences: " + ans);
+	    
+	    }
+	}
+
+/**
+The implemented approach correctly outputs 14, 238 and 32678 for the given sub-routines
+**/
